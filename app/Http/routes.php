@@ -37,4 +37,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/about',function(){
         return 'abuat page';
     });
+    Route::get('/report',function(){
+        return 'report page';
+    });
 });
