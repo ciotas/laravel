@@ -34,4 +34,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
+    Route::get('/about',function(){
+        return 'abuat page';
+    });
 });
