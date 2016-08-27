@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -31,10 +27,14 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => 'web'], function () {
+//    Route::get('/', function () {
+//        return view('welcome');
+//    });
+    Route::resource('posts','PostsController');
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
 
-    Route::get('/about', 'AboutController@index');
+//    Route::get('/about', 'AboutController@index');
 
 });

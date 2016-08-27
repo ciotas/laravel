@@ -1,5 +1,6 @@
 <?php
 
+use App\Discussion;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        Discussion::unguard();
+//        Discussion::truncate();
+//        $this->call(UsersTableSeeder::class);
+        $this->call(DiscussionsTableSeeder::class);
+
+        Discussion::reguard();
+
     }
 }

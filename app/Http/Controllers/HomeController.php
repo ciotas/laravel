@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Discussion;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $discussions=Discussion::latest()->paginate(15);
+        return view('home',compact('discussions'));
     }
 }
