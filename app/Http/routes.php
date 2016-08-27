@@ -36,5 +36,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 
     Route::resource('reports','ReportsController');
+    Route::resource('rebase','RebaseController');
 
 });
