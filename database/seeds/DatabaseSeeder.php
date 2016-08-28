@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         Discussion::unguard();
 //        Discussion::truncate();
 //        $this->call(UsersTableSeeder::class);
-        $this->call(DiscussionsTableSeeder::class);
+//        $this->call(DiscussionsTableSeeder::class);
 
         Discussion::reguard();
 

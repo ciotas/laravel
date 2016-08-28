@@ -31,9 +31,13 @@ Route::group(['middleware' => 'web'], function () {
 //        return view('welcome');
 //    });
     Route::resource('posts','PostsController');
-    Route::auth();
+//    Route::auth();
 
+    Route::get('/user/register','UsersController@register');
+//    Route::post('/user/register','UsersController@store');
+    Route::resource('user','UsersController');
     Route::get('/', 'HomeController@index');
+
 
 //    Route::get('/about', 'AboutController@index');
 
