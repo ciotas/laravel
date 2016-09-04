@@ -1,6 +1,8 @@
 <?php
 
+use App\Comment;
 use App\Discussion;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,12 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Discussion::unguard();
+//        Discussion::unguard();
 //        Discussion::truncate();
-//        $this->call(UsersTableSeeder::class);
 //        $this->call(DiscussionsTableSeeder::class);
+//        Discussion::reguard();
+//
+//        User::unguard();
+//        $this->call(UsersTableSeeder::class);
+//        User::reguard();
 
-        Discussion::reguard();
-
+//        Comment::unguard();
+//        $this->call(CommentTableSeeder::class);
+//        Comment::reguard();
     }
 }

@@ -27,18 +27,22 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => 'web'], function () {
-//    Route::get('/', function () {
-//        return view('welcome');
-//    });
+
+    Route::get('/logout','UsersController@logout');
     Route::resource('posts','PostsController');
+    Route::resource('comment','CommentsController');
 //    Route::auth();
 
     Route::get('/user/register','UsersController@register');
-//    Route::post('/user/register','UsersController@store');
+    Route::get('/user/login','UsersController@login');
+    Route::post('/user/login','UsersController@signin');
+    Route::get('/verify/{confirm_code}','UsersController@confirmEmail');
     Route::resource('user','UsersController');
     Route::get('/', 'HomeController@index');
+    Route::get('/success',function (){
+        return 'register success';
+    });
 
 
-//    Route::get('/about', 'AboutController@index');
 
 });

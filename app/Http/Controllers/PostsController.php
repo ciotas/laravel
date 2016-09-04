@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Discussion;
+use App\Markdown\Markdown;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class PostsController extends Controller
 {
+    protected $markdown;
     /**
      * PostsController constructor.
      */
-    public function __construct()
+    public function __construct(Markdown $markdown)
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['only'=>['create','update','store','edit']]);
+        $this->markdown=$markdown;
     }
 
     /**
@@ -35,7 +38,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('forum.create');
     }
 
     /**
@@ -44,9 +48,14 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\StoreBlogPostRequest $request)
     {
-        //
+        $data=[
+            'user_id' => \Auth::user()->id,
+            'last_user_id' => \Auth::user()->id,
+        ];
+        $discussion=Discussion::create(array_merge($request->all(),$data));
+        return redirect()->action('PostsController@show',['id'=>$discussion->id]);
     }
 
     /**
@@ -58,7 +67,8 @@ class PostsController extends Controller
     public function show($id)
     {
         $discussion=Discussion::findOrFail($id);
-        return view('forum.show',compact('discussion'));
+        $html=$this->markdown->markdown($discussion->body);
+        return view('forum.show',compact('discussion','html'));
     }
 
     /**
@@ -69,7 +79,11 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $discussion=Discussion::findOrFail($id);
+        if(\Auth::user()->id != $discussion->user_id){
+            return redirect('/');
+        }
+        return view('forum.edit',compact('discussion'));
     }
 
     /**
@@ -79,9 +93,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\StoreBlogPostRequest $request, $id)
     {
-        //
+        $discussion=Discussion::findOrFail($id);
+        $discussion->update($request->all());
+        return redirect()->action('PostsController@show',['id'=>$discussion->id]);
     }
 
     /**

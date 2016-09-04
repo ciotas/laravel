@@ -67,7 +67,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/user/login') }}">Login</a></li>
                         <li><a href="{{ url('/user/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
@@ -76,9 +76,14 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href=""><i class="fa fa-btn fa-user"></i>更换头像</a></li>
+                                <li><a href=""><i class="fa fa-btn fa-cog"></i>更换密码</a></li>
+                                <li><a href=""><i class="fa fa-btn fa-heart"></i>特别感谢</a></li>
+                                <li role='separator' class="divider"></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>退出登陆</a></li>
                             </ul>
                         </li>
+                        <li ><img src="{{ Auth::user()->avatar }}" class="media-object img-circle" alt="" width="50"></li>
                     @endif
                 </ul>
             </div>

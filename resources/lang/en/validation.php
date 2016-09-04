@@ -95,6 +95,21 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'name'=>[
+            'required'=>'用户名不能为空',
+        ],
+        'email'=>[
+            'required'=>'邮箱不能为空',
+            'email' => '邮箱格式不正确'
+        ],
+        'password'=>[
+            'required'=>'密码不能为空',
+            'confirmed'=>'两次密码输入不一致',
+            'min:6' =>'密码最少六位字符',
+        ],
+        'password_confirmation'=>[
+            'required'=>'确认密码不一致',
+        ]
     ],
 
     /*
@@ -108,6 +123,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+
+    ],
 
 ];
