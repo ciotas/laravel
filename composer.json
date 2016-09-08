@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "^5.2",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "yuanchao/laravel-5-markdown-editor": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

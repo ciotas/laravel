@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Discussion;
+use YuanChao\Editor\EndaEditor;
 use App\Markdown\Markdown;
 use Illuminate\Http\Request;
 
@@ -109,5 +110,12 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function upload(){
+        // uploads 为你 public 下的目录
+        $data = EndaEditor::uploadImgFile('uploads');
+
+        return json_encode($data);
     }
 }

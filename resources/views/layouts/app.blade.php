@@ -14,6 +14,16 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/jquery.Jcrop.css">
+    <link rel="stylesheet" href="/css/jquery.Jcrop.min.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/js/jquery.Jcrop.js"></script>
+    <script src="/js/jquery.Jcrop.min.js"></script>
+    <script src="/js/jquery.color.js"></script>
+    <script src="/js/vue-resource.min.js"></script>
+    <script src="/js/vue.min.js"></script>
     <style>
         body {
             font-family: 'Lato';
@@ -76,14 +86,14 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href=""><i class="fa fa-btn fa-user"></i>更换头像</a></li>
+                                <li><a href="{{url('/user/avatar')}}"><i class="fa fa-btn fa-user"></i>更换头像</a></li>
                                 <li><a href=""><i class="fa fa-btn fa-cog"></i>更换密码</a></li>
                                 <li><a href=""><i class="fa fa-btn fa-heart"></i>特别感谢</a></li>
                                 <li role='separator' class="divider"></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>退出登陆</a></li>
                             </ul>
                         </li>
-                        <li ><img src="{{ Auth::user()->avatar }}" class="media-object img-circle" alt="" width="50"></li>
+                        <li><img src="{{ Auth::user()->avatar }}" class="media-object img-circle" alt="" width="50"></li>
                     @endif
                 </ul>
             </div>
@@ -94,8 +104,10 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    <script src="/js/jquery.form.js"></script>
 </body>
 </html>

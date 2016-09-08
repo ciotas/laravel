@@ -5,5 +5,7 @@
 
 <div class="form-group">
     {!! Form::label('body','内容:') !!}
-    {!! Form::textarea('body',null,['class'=>'form-control']) !!}
+    <div class="editor">
+    {!! Form::textarea('body',null,['class'=>'form-control','id'=>'myEditor']) !!}
+    </div>
 </div>

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- 引入编辑器代码 -->
+    @include('editor::head')
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
