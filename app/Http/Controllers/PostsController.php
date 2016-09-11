@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function __construct(Markdown $markdown)
     {
-        $this->middleware('auth',['only'=>['create','update','store','edit']]);
+        $this->middleware('auth');
         $this->markdown=$markdown;
     }
 

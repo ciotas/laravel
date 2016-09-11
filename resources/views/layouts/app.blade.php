@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta id="token" name="token" value="{{ csrf_token() }}">
     <title>Laravel</title>
 
     <!-- Fonts -->
@@ -18,12 +18,15 @@
     <link rel="stylesheet" href="/css/jquery.Jcrop.css">
     <link rel="stylesheet" href="/css/jquery.Jcrop.min.css">
 
-    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.Jcrop.js"></script>
     <script src="/js/jquery.Jcrop.min.js"></script>
     <script src="/js/jquery.color.js"></script>
+    <script src="/js/vue.js"></script>
     <script src="/js/vue-resource.min.js"></script>
-    <script src="/js/vue.min.js"></script>
+
     <style>
         body {
             font-family: 'Lato';
@@ -105,7 +108,6 @@
 
     <!-- JavaScripts -->
 
-    <script src="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
     <script src="/js/jquery.form.js"></script>
