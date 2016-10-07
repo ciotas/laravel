@@ -36,6 +36,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/user/register','UsersController@register');
     Route::get('/user/login','UsersController@login');
+    Route::get('/login','UsersController@github');//github登录
+    Route::get('/github/login','UsersController@githubLogin');//github登录callback url
     Route::get('/user/avatar','UsersController@avatar');
     Route::post('/crop/api','UsersController@cropAvatar');
     Route::post('/user/avatar','UsersController@changeavatar');

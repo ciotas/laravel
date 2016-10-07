@@ -10,9 +10,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Overtrue\Socialite\SocialiteManager;
 
 class UsersController extends Controller
 {
+    protected $config = [
+        'github' => [
+            'client_id'     => '83d68e35b3216b7eb9b4',
+            'client_secret' => '9fa52310f5380a043b7a1cac1a1d7f4ba6c740b3',
+            'redirect'      => 'http://laravel.dev/github/login',
+        ],
+    ];
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -200,6 +209,27 @@ class UsersController extends Controller
      */
     public function logout(){
         \Auth::logout();
+        return redirect(url('/'));
+    }
+
+    public function github(){
+        $socialite = new SocialiteManager($this->config);
+        $response = $socialite->driver('github')->redirect();
+        $response->send();
+    }
+
+    public function githubLogin(){
+        $socialite = new SocialiteManager($this->config);
+        $user = $socialite->driver('github')->user();
+
+        User::create([
+            'name' => $user->getNickname(),
+            'email' => $user->getEmail(),
+            'password' => bcrypt(str_random(16)),
+            'avatar' => 'http://laravel.dev/uploads/30_1473313040下载.jpeg',
+            'is_confirmed' => 0,
+            'confirm_code' => 'XqECKWQoFOhICvc6MmyBK4Zja7dz7cXAl93uPJys9qpj00uy',
+        ]);
         return redirect(url('/'));
     }
 }

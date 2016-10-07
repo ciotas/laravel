@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Favourite;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -13,6 +14,7 @@ class FavouritesController extends Controller
      */
     public function __construct()
     {
+//        $this->middleware('auth');
     }
 
     /**
@@ -22,7 +24,7 @@ class FavouritesController extends Controller
      */
     public function index()
     {
-        //
+        $favourites = \Auth::user()->favourites();
     }
 
     /**
@@ -43,7 +45,7 @@ class FavouritesController extends Controller
      */
     public function store(Request $request)
     {
-        if(!\Auth::user()){
+        if(!\Auth::check()){
             return redirect(url('/user/login'));
         }
         \Auth::user()->favourites()->attach($request->get('lesson_id'));
@@ -93,6 +95,10 @@ class FavouritesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!\Auth::check()){
+            return redirect(url('user/login'));
+        }
+        \Auth::user()->favourites()->detach($id);
+        return redirect()->back();
     }
 }

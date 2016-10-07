@@ -25,7 +25,7 @@ class LessonsController extends Controller
     public function index()
     {
         $lessons = Lesson::latest()->paginate(15);
-        if(!\Auth::user()){
+        if(!\Auth::check()){
             $favourites = array();
         }else{
             $favourites = Favourite::where('user_id',\Auth::user()->id)
