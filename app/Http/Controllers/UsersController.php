@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendReminderEmail;
 use App\User;
 use Image;
 use Illuminate\Http\Request;
@@ -52,7 +53,14 @@ class UsersController extends Controller
             'confirm_code'=>str_random(48),
         ];
         $user=User::register(array_merge($request->all(),$data));
-        return redirect('/success');
+        //或者用队列 ，用supervisor来监听
+        /*
+        $job = (new SendReminderEmail($user));
+//            $job = (new SendReminderEmail($user))->delay(60);//延时发送
+//            $job = (new SendReminderEmail($user))->onQueue('SendReminderEmail');//指定队列
+        $this->dispatch($job);
+        */
+        return redirect(url('/success'));
     }
 
     /**
@@ -75,7 +83,7 @@ class UsersController extends Controller
         $user->confirm_code = str_random(48);
         $user->save();
 //        \Session::flash('email_confirm','测试');
-        return redirect('user/login');
+        return redirect(url('user/login'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -133,7 +141,7 @@ class UsersController extends Controller
         }
         //若没有任何提示也没有提示 咋办? 看下面
          \Session::flash('user_login_failed','密码不正确或邮箱没验证');
-        return redirect('/user/login')->withInput();//将用户输入的内容重新传回去
+        return redirect(url('user/login'))->withInput();//将用户输入的内容重新传回去
     }
 
     public function avatar(){
@@ -185,13 +193,13 @@ class UsersController extends Controller
         $user->avatar =asset($photo);
         $user->save();
 
-        return redirect('/user/avatar');
+        return redirect(url('/user/avatar'));
     }
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function logout(){
         \Auth::logout();
-        return redirect('/');
+        return redirect(url('/'));
     }
 }

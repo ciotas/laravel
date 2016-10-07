@@ -58,3 +58,11 @@
      margin-top: 30px;
      z-index: 3;
  }
+
+ .favourited,.not-favourited:hover {
+     color: red;
+ }
+
+ .not-favourited,.favourited:hover{
+     color: #000;
+ }

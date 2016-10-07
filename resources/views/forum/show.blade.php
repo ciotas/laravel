@@ -96,7 +96,10 @@
                     var comment=this.newComment;
                     var post=this.newPost;
                     post.body=comment.body;
-                    this.$http.post('/comment',post,function() {
+//                    this.$http.post('/comment',post,function() {
+//                        this.comments.push(comment);
+//                    });
+                    this.$http.post('{{url("/comment")}}', post).then(function(){
                         this.comments.push(comment);
                     });
                     this.newComment={

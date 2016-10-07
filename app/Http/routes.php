@@ -42,6 +42,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/user/login','UsersController@signin');
     Route::get('/verify/{confirm_code}','UsersController@confirmEmail');
     Route::resource('user','UsersController');
+    Route::resource('lessons','LessonsController');
+    Route::resource('favourite','FavouritesController');
     Route::get('/', 'HomeController@index');
 
     Route::get('/success',function (){

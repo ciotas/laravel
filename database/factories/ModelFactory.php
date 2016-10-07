@@ -41,3 +41,12 @@ $factory->define(App\Comment::class, function (Faker\Generator $faker) {
         'discussion_id' => $faker->randomElement($discussion_ids),
     ];
 });
+
+$factory->define(App\Lesson::class,function (Faker\Generator $faker){
+    return [
+        'title' => $faker->sentence,
+        'intro' => $faker->paragraph,
+        'image' => $faker->imageUrl(),
+        'published_at' => $faker->dateTime
+    ];
+});

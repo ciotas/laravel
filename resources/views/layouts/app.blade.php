@@ -60,7 +60,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ url('/') }}">首页</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="{{ url('/lessons') }}">课程</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
