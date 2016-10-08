@@ -221,15 +221,15 @@ class UsersController extends Controller
     public function githubLogin(){
         $socialite = new SocialiteManager($this->config);
         $user = $socialite->driver('github')->user();
-
         User::create([
-            'name' => $user->getNickname(),
-            'email' => $user->getEmail(),
-            'password' => bcrypt(str_random(16)),
-            'avatar' => 'http://laravel.dev/uploads/30_1473313040下载.jpeg',
-            'is_confirmed' => 0,
-            'confirm_code' => 'XqECKWQoFOhICvc6MmyBK4Zja7dz7cXAl93uPJys9qpj00uy',
+            'name' => $user['nickname'],
+            'email' => $user['email'],
+            'password' => bcrypt('a761177953z'),
+            'avatar' => $user['avatar'],
+            'is_confirmed' => 1,
+            'confirm_code' => str_random(48),
         ]);
-        return redirect(url('/'));
+
+        return redirect(url('/user/login'));
     }
 }
