@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/jquery.Jcrop.css">
     <link rel="stylesheet" href="/css/jquery.Jcrop.min.css">
-
+    <link href="https://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
@@ -26,7 +26,7 @@
     <script src="/js/jquery.color.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/vue-resource.min.js"></script>
-
+    <script src="https://cdn.bootcss.com/select2/4.0.3/js/select2.full.min.js"></script>
     <style>
         body {
             font-family: 'Lato';
@@ -61,7 +61,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ url('/') }}">首页</a></li>
                     <li><a href="{{ url('/lessons') }}">课程</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{url('/articles')}}">文章</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                         <ul class="dropdown-menu">

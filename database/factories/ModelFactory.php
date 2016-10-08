@@ -50,3 +50,16 @@ $factory->define(App\Lesson::class,function (Faker\Generator $faker){
         'published_at' => $faker->dateTime
     ];
 });
+
+$factory->define(App\Article::class,function (Faker\Generator $faker){
+    return [
+        'title' => $faker->sentence,
+        'body' => $faker->paragraph,
+    ];
+});
+
+$factory->define(App\Tag::class,function (Faker\Generator $faker){
+    return [
+        'tagname' => $faker->word,
+    ];
+});

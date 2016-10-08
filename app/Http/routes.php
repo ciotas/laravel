@@ -46,6 +46,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('user','UsersController');
     Route::resource('lessons','LessonsController');
     Route::resource('favourite','FavouritesController');
+    Route::resource('articles','ArticlesController');
     Route::get('/', 'HomeController@index');
 
     Route::get('/success',function (){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendReminderEmail;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Image;
 use Illuminate\Http\Request;
 
@@ -14,14 +15,6 @@ use Overtrue\Socialite\SocialiteManager;
 
 class UsersController extends Controller
 {
-    protected $config = [
-        'github' => [
-            'client_id'     => '83d68e35b3216b7eb9b4',
-            'client_secret' => '9fa52310f5380a043b7a1cac1a1d7f4ba6c740b3',
-            'redirect'      => 'http://laravel.dev/github/login',
-        ],
-    ];
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -141,8 +134,10 @@ class UsersController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function signin(Requests\UserLoginRequest $request){
-        if(\Auth::attempt([
-            'email'=>$request->get('email'),
+        $field = filter_var($request->get('email'),FILTER_VALIDATE_EMAIL)?'email':'nickname';
+        if(Auth::attempt([
+//            'email'=>$request->get('email'),
+            $field => $request->get('email'),
             'password'=>$request->get('password'),
             'is_confirmed'=>1,
         ])){
@@ -213,15 +208,15 @@ class UsersController extends Controller
     }
 
     public function github(){
-        $socialite = new SocialiteManager($this->config);
+        $socialite = new SocialiteManager(config('services'));
         $response = $socialite->driver('github')->redirect();
         $response->send();
     }
 
     public function githubLogin(){
-        $socialite = new SocialiteManager($this->config);
+        $socialite = new SocialiteManager(config('services'));
         $user = $socialite->driver('github')->user();
-        User::create([
+        $user = User::create([
             'name' => $user['nickname'],
             'email' => $user['email'],
             'password' => bcrypt('a761177953z'),
@@ -230,6 +225,7 @@ class UsersController extends Controller
             'confirm_code' => str_random(48),
         ]);
 
-        return redirect(url('/user/login'));
+        \Auth::login($user);
+        return redirect(url('/'));
     }
 }
