@@ -25,6 +25,10 @@
 Route::group(['middleware' => ['web']], function () {
     //
 });
+Route::group(['prefix' => 'api/v1'], function () {
+    Route::resource('lessons','api\LessonsController');
+});
+
 
 Route::group(['middleware' => 'web'], function () {
 
