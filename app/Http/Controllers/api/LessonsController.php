@@ -3,13 +3,26 @@
 namespace App\Http\Controllers\api;
 
 use App\Lesson;
+use App\Transformer\LessonTransformer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class LessonsController extends Controller
+class LessonsController extends ApiController
 {
+    protected $lessonTransformer;
+
+    /**
+     * LessonsController constructor.
+     * @param $lessonTransformer
+     */
+    public function __construct(LessonTransformer $lessonTransformer)
+    {
+        $this->lessonTransformer = $lessonTransformer;
+        $this->middleware('auth.basic',['only'=>['store','update']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +31,9 @@ class LessonsController extends Controller
     public function index()
     {
         $lessons = Lesson::all();
-        return \Response::json([
-            'code' => 200,
+        return $this->response([
             'msg' => 'success',
-            'data' => $this->transformCollection($lessons)
+            'data' => $this->lessonTransformer->transformCollection($lessons->toArray())
         ]);
     }
 
@@ -43,7 +55,14 @@ class LessonsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(! $request->get('title') or ! $request->get('intro')){
+            return $this->setStatusCode(422)->responseError('validate fails');
+        }
+        Lesson::create($request->all());
+        return $this->setStatusCode(201)->response([
+            'msg' => 'success',
+            'message' => 'lesson created'
+        ]);
     }
 
     /**
@@ -54,11 +73,13 @@ class LessonsController extends Controller
      */
     public function show($id)
     {
-        $lesson = Lesson::findOrFail($id);
-        return \Response::json([
-            'code' => 200,
+        $lesson = Lesson::find($id);
+        if(!$lesson){
+            return $this->responseNotFound();
+        }
+        return $this->response([
             'msg' => 'success',
-            'data' => $this->transform($lesson)
+            'data' => $this->lessonTransformer->transform($lesson)
         ]);
     }
 
@@ -95,19 +116,5 @@ class LessonsController extends Controller
     {
         //
     }
-
-    private function transformCollection($lessons)
-    {
-        return array_map([$this,'transform'],$lessons->toArray());
-    }
-
-    private function transform($lessons){
-        return [
-            'title' => $lessons['title'],
-            'content' => $lessons['intro'],
-            'imageurl' =>$lessons['image']
-        ];
-    }
-
 
 }

@@ -25,8 +25,15 @@
 Route::group(['middleware' => ['web']], function () {
     //
 });
-Route::group(['prefix' => 'api/v1'], function () {
-    Route::resource('lessons','api\LessonsController');
+//Route::group(['prefix' => 'api/v1'], function () {
+//    Route::resource('lessons','api\LessonsController');
+//});
+
+$api = app('Dingo\Api\Routing\Router');
+$api->version('v1', function ($api) {
+    $api->group(['namespace' => 'App\Api\Controllers'],function ($api){
+        $api->get('lessons','LessonsController@index');
+    });
 });
 
 
