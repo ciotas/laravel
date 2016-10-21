@@ -17,4 +17,12 @@ class LessonsController extends BaseController
         $lessons = Lesson::all();
         return $this->collection($lessons, new LessonTransformer());
     }
+
+    public function show($id){
+        $lesson = Lesson::find($id);
+        if(!$lesson){
+            return $this->response->errorNotFound('lesson not found');
+        }
+        return $this->item($lesson,new LessonTransformer());
+    }
 }

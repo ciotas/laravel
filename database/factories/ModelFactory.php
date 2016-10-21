@@ -63,3 +63,10 @@ $factory->define(App\Tag::class,function (Faker\Generator $faker){
         'tagname' => $faker->word,
     ];
 });
+$factory->define(App\Client::class,function (Faker\Generator $faker){
+    return [
+        'id' => str_random(38),
+        'secret' => str_random(38),
+        'name' => $faker->word
+    ];
+});

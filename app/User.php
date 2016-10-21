@@ -51,4 +51,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Lesson::class,'favourites')->withTimestamps();
     }
 
+//    public function getAuthPassword(){
+//        return $this->user_password;
+//    }
 }
