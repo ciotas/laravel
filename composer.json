@@ -12,9 +12,9 @@
         "intervention/image": "^2.3",
         "yuanchao/laravel-5-markdown-editor": "dev-master",
         "overtrue/socialite": "~1.0",
-        "dingo/api": "1.0.*@dev",
-        "tymon/jwt-auth": "0.5.*",
-        "lucadegasperi/oauth2-server-laravel": "5.1.*"
+        "pingplusplus/pingpp-php": "dev-master",
+        "overtrue/laravel-wechat": "~3.0",
+        "barryvdh/laravel-cors": "^0.8.2"
 
     },
     "require-dev": {

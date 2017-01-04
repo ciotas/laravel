@@ -150,11 +150,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         YuanChao\Editor\EndaEditorServiceProvider::class,
-        Dingo\Api\Provider\LaravelServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
-        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
-
+        Overtrue\LaravelWechat\ServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -162,6 +159,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\BillingServiceProvider::class,
+
 
 
     ],
@@ -214,7 +213,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'EndaEditor' => YuanChao\Editor\Facade\EndaEditorFacade::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
+        'Wechat' => Overtrue\LaravelWechat\Facade::class,
 
     ],
 

@@ -70,3 +70,9 @@ $factory->define(App\Client::class,function (Faker\Generator $faker){
         'name' => $faker->word
     ];
 });
+
+$factory->define(App\Task::class,function (Faker\Generator $faker){
+    return [
+        'body' => $faker->paragraph,
+    ];
+});

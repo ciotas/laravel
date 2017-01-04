@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function __construct(Markdown $markdown)
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
         $this->markdown=$markdown;
     }
 
@@ -67,6 +67,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
+        if(! \Auth::check()){
+            return redirect('user/login');
+        }
         $discussion=Discussion::findOrFail($id);
         $html=$this->markdown->markdown($discussion->body);
         return view('forum.show',compact('discussion','html'));
